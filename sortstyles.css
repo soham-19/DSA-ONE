@@ -1,0 +1,88 @@
+#container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    height: 200px;
+    width: min-content;
+    margin: 50px auto;
+    padding: 50px 0px;
+    background-image: linear-gradient(to bottom, #EEEEEE, #CCCCCC);
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+  }
+  .header {
+    background-color: #37306B;
+    margin: auto 100px;
+    margin-top: 100px;
+    border-radius: 10px;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}    
+  body {
+      background-color: #f0f0f0; /* replace with your preferred background color */
+    }
+    
+  
+  .bar {
+    background-color: #323232;
+    margin: 5px;
+    width: 20px;
+    position: relative;
+    border-radius: 3px;
+    box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease-in-out;
+    
+  }
+  
+  .bar p {
+    margin: 0;
+    text-align: center;
+    font-size: 12px;
+    position: absolute;
+    bottom: -20px;
+    width: 100%;
+    color: #333;
+  }
+  
+  .bar.swapping {
+    background-color: #D27685;
+  }
+  
+  .bar.focus {
+    background-color: #0C7B93;
+    z-index: 1;
+    transform: translateY(-10px);
+    transform:scaleY(120%);
+    box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.5);
+  }
+  
+  .bar.sorted {
+    background-color: #FF1E56;
+    box-shadow: none;
+  }
+  /* Add some basic styles to the Sort button */
+  button {
+    display: block;
+  margin: auto;
+  background-color: #37306B;
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Add a hover effect to the Sort button */
+button:hover {
+  background-color: #5350A2;
+}
+
+/* Increase the font size and padding of the Sort button on larger screens */
+@media screen and (min-width: 768px) {
+  button {
+    font-size: 20px;
+    padding: 15px 30px;
+  }
+}

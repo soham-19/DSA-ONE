@@ -1,0 +1,61 @@
+/* Define your styles here */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #C8C8C8;
+}
+
+.header {
+    background-color: #333;
+    color: #ff8989;
+    padding: 20px;
+    text-align: center;
+}
+
+.header h1{
+    color : #fafafaee;
+}
+.header {
+    background-color: #333;
+    color: #ff8989;
+    padding: 20px;
+    text-align: center;
+}
+
+.dropbtn {
+    background-color: #4CAF50;
+    width: 500px;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    
+}
+
+.dropdown {
+    position: relative;
+    width: inherit;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    background-color: #4CAF5033;
+    width: 500px;
+}
+.dropdown:hover .dropdown-content a:hover {
+    background-color: #4CAF5099;
+}
