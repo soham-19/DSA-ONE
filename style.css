@@ -1,7 +1,9 @@
 /* Define your styles here */
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #C8C8C8;
+    background-color: #F6F6F6;
+    font-family: 'Poppins', sans-serif;
 }
 
 .header {
@@ -11,51 +13,81 @@ body {
     text-align: center;
 }
 
-.header h1{
-    color : #fafafaee;
+.header h1 {
+    color: #fafafa;
+    margin: 0;
 }
-.header {
-    background-color: #333;
-    color: #ff8989;
+
+.content {
+    max-width: 600px;
+    margin: 0 auto;
     padding: 20px;
     text-align: center;
+}
+
+.content h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.content p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
 }
 
 .dropbtn {
     background-color: #4CAF50;
-    width: 500px;
     color: white;
     padding: 16px;
-    font-size: 16px;
+    font-size: 1.2em;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
-    
+    transition: all 0.3s ease-in-out;
+    border: 2px solid #325634;
+}
+
+.dropdown-content a:hover {
+    background-color: #4CAF50;
+    letter-spacing: 5px;
+    border-radius: 5px;
+    color: #fff;
 }
 
 .dropdown {
     position: relative;
-    width: inherit;
     display: inline-block;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    background-color: #F6F6F6;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 5px;
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
     z-index: 1;
+    top: 100%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    border: 2px solid #325634;
+    border-top: none;
 }
 
 .dropdown-content a {
-    color: black;
+    display: block;
+    color: #4CAF50;
     padding: 12px 16px;
     text-decoration: none;
-    display: block;
+    font-size: 1.1em;
+    transition: all 0.3s ease-in-out;
 }
 
-.dropdown:hover .dropdown-content {
-    display: block;
-    background-color: #4CAF5033;
-    width: 500px;
-}
-.dropdown:hover .dropdown-content a:hover {
-    background-color: #4CAF5099;
+.dropdown-content a:hover {
+    background-color: #57c35b;
+    color: white;
 }

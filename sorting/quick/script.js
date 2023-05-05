@@ -17,54 +17,72 @@ for (let i = 0; i < numbers.length; i++) {
   container.appendChild(bar);
 }
 
-// implement bubble sort and update the visualization after each swap
-async function bubbleSort() {
-  const bars = container.querySelectorAll('.bar');
-  for (let i = 0; i < numbers.length - 1; i++) {
-    for (let j = 0; j < numbers.length - i - 1; j++) {
-      // add focus class to the bars being compared
-      bars[j].classList.add('focus');
-      bars[j+1].classList.add('focus');
-
-      // wait a short time to slow down the animation
-      await new Promise(resolve => setTimeout(resolve, 200));
-
-      if (numbers[j] > numbers[j+1]) {
-        // swap numbers[j] and numbers[j+1]
-        const temp = numbers[j];
-        numbers[j] = numbers[j+1];
-        numbers[j+1] = temp;
-
-        // update the visualization
-        bars[j].style.height = `${numbers[j]}px`;
-        bars[j+1].style.height = `${numbers[j+1]}px`;
-        bars[j].querySelector('p').innerHTML = numbers[j];
-        bars[j+1].querySelector('p').innerHTML = numbers[j+1];
-        bars[j].classList.add('swapping');
-        bars[j+1].classList.add('swapping');
-
-        // wait a short time to slow down the animation
-        await new Promise(resolve => setTimeout(resolve, 100));
-
-        // remove swapping class and show the numbers again
-        bars[j].classList.remove('swapping');
-        bars[j+1].classList.remove('swapping');
-      }
-
-      // remove focus class from the bars being compared
-      bars[j].classList.remove('focus');
-      bars[j+1].classList.remove('focus');
-    }
-    // change the color of the sorted bars to green
-    bars[numbers.length - i - 1].classList.add('sorted');
-    bars[numbers.length - i - 1].querySelector('p').classList.add('hide');
+// implement quick sort and update the visualization after each swap
+async function quickSort(low, high) {
+  if (low < high) {
+    const pivotIndex = await partition(low, high);
+    await quickSort(low, pivotIndex - 1);
+    await quickSort(pivotIndex + 1, high);
   }
-  // change the color of the first bar to green
-  bars[0].classList.add('sorted');
-  bars[0].querySelector('p').classList.add('hide');
+}
+
+async function partition(low, high) {
+  const bars = container.querySelectorAll('.bar');
+  const pivotValue = numbers[high];
+  let i = low;
+  for (let j = low; j < high; j++) {
+    bars[high].classList.add('focus');
+    bars[j].classList.add('focus');
+
+    await new Promise(resolve => setTimeout(resolve, 200));
+
+    if (numbers[j] < pivotValue) {
+      await swap(i, j);
+      bars[i].classList.remove('focus');
+      i++;
+    }
+
+    bars[j].classList.remove('focus');
+  }
+  await swap(i, high);
+  bars[i].classList.remove('focus');
+  bars[i].classList.add('sorted');
+  bars[i].style.backgroundColor = '#FF1E56';
+  bars[i].querySelector('p').classList.add('hide');
+
+  await new Promise(resolve => setTimeout(resolve, 100));
+  
+  
+  return i;
+}
+
+async function swap(i, j) {
+  const bars = container.querySelectorAll('.bar');
+  const temp = numbers[i];
+  numbers[i] = numbers[j];
+  numbers[j] = temp;
+
+  bars[i].style.height = `${numbers[i]}px`;
+  bars[j].style.height = `${numbers[j]}px`;
+  bars[i].querySelector('p').innerHTML = numbers[i];
+  bars[j].querySelector('p').innerHTML = numbers[j];
+
+  bars[i].classList.add('swapping');
+  bars[j].classList.add('swapping');
+
+  await new Promise(resolve => setTimeout(resolve, 100));
+
+  bars[i].classList.remove('swapping');
+  bars[j].classList.remove('swapping');
+}
+function changeBarColors(color) {
+  const bars = document.querySelectorAll('.bar');
+  for (let i = 0; i < bars.length; i++) {
+    bars[i].style.backgroundColor = color;
+  }
 }
 
 // sort the array when the button is clicked
 function sort() {
-  bubbleSort();
+  quickSort(0, numbers.length - 1);
 }

@@ -73,3 +73,15 @@ async function selectionSort() {
 function sort() {
   selectionSort();
 }
+function downloadJavaFile() {
+  const fileContent = 'public class SelectionSort {\n\n    public static void selectionSort(int[] arr) {\n        int n = arr.length;\n        for (int i = 0; i < n-1; i++) {\n            int minIndex = i;\n            for (int j = i+1; j < n; j++) {\n                if (arr[j] < arr[minIndex]) {\n                    minIndex = j;\n                }\n            }\n            int temp = arr[minIndex];\n            arr[minIndex] = arr[i];\n            arr[i] = temp;\n        }\n    }\n\n    public static void printArray(int[] arr) {\n        System.out.print("[ ");\n        for (int i = 0; i < arr.length; i++) {\n            System.out.print(arr[i] + " ");\n        }\n        System.out.print("]");\n    }\n\n    public static void main(String[] args) {\n        int[] arr = {64, 34, 25, 12, 22, 11, 90};\n        System.out.println("Original array: ");\n        printArray(arr);\n        \n        selectionSort(arr);\n        \n        System.out.println("\\n\\nSorted array: ");\n        printArray(arr);\n    }\n}';
+  const blob = new Blob([fileContent], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.download = 'SelectionSort.java';
+  link.href = url;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+}

@@ -17,54 +17,55 @@ for (let i = 0; i < numbers.length; i++) {
   container.appendChild(bar);
 }
 
-// implement bubble sort and update the visualization after each swap
-async function bubbleSort() {
+// implement merge sort and update the visualization after each merge
+async function mergeSort(start, end) {
+  if (start >= end) return;
+
+  const mid = Math.floor((start + end) / 2);
+  await mergeSort(start, mid);
+  await mergeSort(mid + 1, end);
+  await merge(start, mid, end);
+}
+
+async function merge(start, mid, end) {
   const bars = container.querySelectorAll('.bar');
-  for (let i = 0; i < numbers.length - 1; i++) {
-    for (let j = 0; j < numbers.length - i - 1; j++) {
-      // add focus class to the bars being compared
-      bars[j].classList.add('focus');
-      bars[j+1].classList.add('focus');
-
-      // wait a short time to slow down the animation
-      await new Promise(resolve => setTimeout(resolve, 200));
-
-      if (numbers[j] > numbers[j+1]) {
-        // swap numbers[j] and numbers[j+1]
-        const temp = numbers[j];
-        numbers[j] = numbers[j+1];
-        numbers[j+1] = temp;
-
-        // update the visualization
-        bars[j].style.height = `${numbers[j]}px`;
-        bars[j+1].style.height = `${numbers[j+1]}px`;
-        bars[j].querySelector('p').innerHTML = numbers[j];
-        bars[j+1].querySelector('p').innerHTML = numbers[j+1];
-        bars[j].classList.add('swapping');
-        bars[j+1].classList.add('swapping');
-
-        // wait a short time to slow down the animation
-        await new Promise(resolve => setTimeout(resolve, 100));
-
-        // remove swapping class and show the numbers again
-        bars[j].classList.remove('swapping');
-        bars[j+1].classList.remove('swapping');
-      }
-
-      // remove focus class from the bars being compared
-      bars[j].classList.remove('focus');
-      bars[j+1].classList.remove('focus');
+  const leftArray = numbers.slice(start, mid + 1);
+  const rightArray = numbers.slice(mid + 1, end + 1);
+  let i = 0, j = 0, k = start;
+  while (i < leftArray.length && j < rightArray.length) {
+    if (leftArray[i] < rightArray[j]) {
+      numbers[k++] = leftArray[i++];
+    } else {
+      numbers[k++] = rightArray[j++];
     }
-    // change the color of the sorted bars to green
-    bars[numbers.length - i - 1].classList.add('sorted');
-    bars[numbers.length - i - 1].querySelector('p').classList.add('hide');
+    // highlight the bars being compared
+    bars[start + i].classList.add('focus');
+    bars[mid + 1 + j].classList.add('focus');
+    // wait a short time to slow down the animation
+    await new Promise(resolve => setTimeout(resolve, 200));
+    // update the visualization
+    bars[start + i].style.height = `${numbers[start + i]}px`;
+    bars[mid + 1 + j].style.height = `${numbers[mid + 1 + j]}px`;
+    bars[start + i].querySelector('p').innerHTML = numbers[start + i];
+    bars[mid + 1 + j].querySelector('p').innerHTML = numbers[mid + 1 + j];
+    // remove focus class from the bars being compared
+    bars[start + i].classList.remove('focus');
+    bars[mid + 1 + j].classList.remove('focus');
   }
-  // change the color of the first bar to green
-  bars[0].classList.add('sorted');
-  bars[0].querySelector('p').classList.add('hide');
+  while (i < leftArray.length) {
+    numbers[k++] = leftArray[i++];
+  }
+  while (j < rightArray.length) {
+    numbers[k++] = rightArray[j++];
+  }
+  // highlight the sorted bars in green
+  for (let l = start; l <= end; l++) {
+    bars[l].classList.add('sorted');
+    bars[l].querySelector('p').classList.add('hide');
+  }
 }
 
 // sort the array when the button is clicked
 function sort() {
-  bubbleSort();
+  mergeSort(0, numbers.length - 1);
 }

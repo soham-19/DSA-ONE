@@ -74,7 +74,7 @@ function downloadJavaFile() {
   const blob = new Blob([fileContent], { type: 'text/plain' });
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
-  link.download = 'BubbleSort.java';
+  link.download = 'HelloWorld.java';
   link.href = url;
   document.body.appendChild(link);
   link.click();

@@ -2,12 +2,43 @@
 <html>
   <head>
     <title>Bubble Sort Visualization</title>
-    <link rel="stylesheet" type="text/css" href="/sortstyles.css">
+    <link rel="stylesheet" href="/sortstyles.css">
   </head>
   <body>
-	<h1 class="header">Selection Sort - Visualization</h1>
-    <div id="container"></div>
+    <h1 class="header">Selection Sort - Visualization</h1>
+    <div style="display: flex;">
+      <div id="container"></div>
+      <div id="data">
+        <table>
+          <tr>
+            <th>*</th>
+            <th>Worst Case</th>
+            <th>Average Case</th>
+            <th>Best Case</th>
+          </tr>
+          <tr>
+            <td>Time Complexity</td>
+            <td>0(n<sup>2</sup>)</td>
+            <td>0(n<sup>2</sup>)</td>
+            <td>0(n)</td>
+          </tr>
+          <tr>
+            <td>Space Complexity</td>
+            <td>0(1)</td>
+            <td>0(1)</td>
+            <td>0(1)</td>
+          </tr>
+        </table>
+      </div>
+    </div>
     <button onclick="sort()">Sort</button>
+    <hr>
+    <div class="download" id="download-section">
+      <!-- <p>Click the button below to download the Java code:</p> -->
+      <button onclick="downloadJavaFile()" id="download-button">Download Java Code</button>
+
+    </div>
+    
     <script src="script.js"></script>
   </body>
 </html>
