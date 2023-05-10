@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Stack Visualization</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<h1 class="header">Stack - Visualization</h1>
+
+	<div id="wrapper">
+
+		<div class="stack-container">
+			<div class="stack">
+				<div class="stack-item">Item 1</div>
+				<div class="stack-item">Item 2</div>
+				<div class="stack-item">Item 3</div>
+			</div>
+
+			<div class="stack-controls">
+				<input type="text" id="item-input" placeholder="Enter item value">
+				<button onclick="pushItem()">Push Item</button>
+				<button onclick="popItem()">Pop Item</button>
+				<button onclick="peekTop()">Peek Item</button>
+			</div>
+		</div>
+		<div id="data">
+			<table>
+				<tr>
+					<th>*</th>
+					<th>push(x)</th>
+					<th>pop()</th>
+					<th>peek()</th>
+				</tr>
+				<tr>
+					<td>Time Complexity</td>
+					<td>0(1)</td>
+					<td>0(1)</td>
+					<td>0(1)</td>
+				</tr>
+
+			</table>
+		</div>
+		<div class="download" id="download-section">
+			<!-- <p>Click the button below to download the Java code:</p> -->
+			<button onclick="downloadJavaFile()" id="download-button">Download Java Code</button>
+
+
+		</div>
+	</div>
+	<!-- <br> -->
+
+	<script>
+		const stack = document.querySelector('.stack');
+		const itemInput = document.getElementById('item-input');
+
+		function pushItem() {
+			const value = itemInput.value;
+			const item = document.createElement('div');
+			item.classList.add('stack-item', 'push');
+			item.innerText = value;
+			stack.appendChild(item);
+			itemInput.value = '';
+
+			setTimeout(() => {
+				item.classList.remove('push');
+			}, 1000);
+		}
+
+
+		function popItem() {
+			const topItem = stack.lastElementChild;
+			if (topItem) {
+				topItem.style.animation = 'popAnimation 1s forwards';
+				setTimeout(() => {
+					stack.removeChild(topItem);
+				}, 1000);
+			}
+		}
+
+		function peekTop() {
+			const topItem = stack.lastElementChild;
+			if (topItem) {
+				topItem.style.backgroundColor = '#f0ad4e'; // Change background color to yellow
+				setTimeout(() => {
+					topItem.style.backgroundColor = '#37306B'; // Reset background color after 5 seconds
+				}, 800);
+			}
+		}
+
+		function downloadJavaFile() {
+			const fileContent = 'import java.util.EmptyStackException;\n\npublic class StringStack {\n    private static final int DEFAULT_CAPACITY = 10;\n    private String[] elements;\n    private int size;\n\n    public StringStack() {\n        elements = new String[DEFAULT_CAPACITY];\n        size = 0;\n    }\n\n    public void push(String item) {\n        ensureCapacity();\n        elements[size++] = item;\n    }\n\n    public String pop() {\n        if (isEmpty()) {\n            throw new EmptyStackException();\n        }\n        String item = elements[--size];\n        elements[size] = null;\n        return item;\n    }\n\n    public boolean isEmpty() {\n        return size == 0;\n    }\n\n    public int size() {\n        return size;\n    }\n\n    private void ensureCapacity() {\n        if (size == elements.length) {\n            String[] newElements = new String[2 * size];\n            System.arraycopy(elements, 0, newElements, 0, size);\n            elements = newElements;\n        }\n    }\n\n    public static void main(String[] args) {\n        StringStack stack = new StringStack();\n        stack.push("Hello");\n        stack.push("World");\n        stack.push("Java");\n\n        System.out.println("Size of stack: " + stack.size());\n\n        while (!stack.isEmpty()) {\n            System.out.println(stack.pop());\n        }\n    }\n}';
+			const blob = new Blob([fileContent], { type: 'text/plain' });
+			const url = URL.createObjectURL(blob);
+			const link = document.createElement('a');
+			link.download = 'StringStack.java';
+			link.href = url;
+			document.body.appendChild(link);
+			link.click();
+			document.body.removeChild(link);
+			URL.revokeObjectURL(url);
+		}
+
+
+
+
+	</script>
+</body>
+
+</html>
