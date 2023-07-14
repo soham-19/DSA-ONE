@@ -3,19 +3,42 @@
 
 <head>
 	<title>Stack Visualization</title>
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="/stackqueue.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="icon" type="image/x-icon" href="/logo/bar-graph.png">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@500&display=swap" rel="stylesheet">
 </head>
 
 <body>
+	<ul class="navbar">
+		<li><a href="/index.html"><i class="fa fa-home"></i></a></li>
+		<li>
+			<a href="#">Sorting</a>
+			<ul class="drp">
+				<li><a href="/sorting/bubble/bubble-sort.html">Bubble Sort</a></li>
+				<li><a href="/sorting/selection/selection-sort.html">Selection Sort</a></li>
+				<li><a href="/sorting/shell/shell-sort.html">Shell Sort</a></li>
+				<li><a href="/sorting/merge/merge-sort.html">Merge Sort</a></li>
+				<li><a href="/sorting/quick/quick-sort.html">Quick Sort</a></li>
+				<li><a id="last" href="/sorting/insertion/insertion-sort.html">Insertion Sort</a></li>
+			</ul>
+		</li>
+		<li><a href="/stack/stack.html">Stack</a></li>
+		<li><a href="/queue/queue.html">Queue</a></li>
+	</ul>
+
+
 	<h1 class="header">Stack - Visualization</h1>
 
 	<div id="wrapper">
 
 		<div class="stack-container">
 			<div class="stack">
-				<div class="stack-item">Item 1</div>
-				<div class="stack-item">Item 2</div>
-				<div class="stack-item">Item 3</div>
+				<div class="stack-item">Initial Top</div>
+				<!-- <div class="stack-item">Item 2</div> -->
+				<!-- <div class="stack-item">Item 3</div> -->
 			</div>
 
 			<div class="stack-controls">
@@ -25,6 +48,7 @@
 				<button onclick="peekTop()">Peek Item</button>
 			</div>
 		</div>
+
 		<div id="data">
 			<table>
 				<tr>
@@ -42,13 +66,44 @@
 
 			</table>
 		</div>
-		<div class="download" id="download-section">
-			<!-- <p>Click the button below to download the Java code:</p> -->
-			<button onclick="downloadJavaFile()" id="download-button">Download Java Code</button>
+		<!-- <div class="download" id="download-section"> -->
+		<!-- <p>Click the button below to download the Java code:</p> -->
+		<!-- <button onclick="downloadJavaFile()" id="download-button">Download Java Code</button> -->
+		<button onclick="downloadJavaFile()" id="download-button"> Download Code<i style="margin-left: 8px;"
+				class="fa fa-download"></i></button>
 
 
-		</div>
 	</div>
+	</div>
+	<div class="data adv-disadv">
+		<p>Stack</p>
+		<ul>
+
+			<li>Stack follows the LIFO (Last-In-First-Out) principle.
+			</li>
+			<li>Elements are added and removed from the top of the stack.
+			</li>
+			<li>Used in scenarios where recently added elements are accessed first.
+			</li>
+			<li>Efficient for managing function calls, expression evaluation, and undo operations.
+
+
+
+			</li>
+
+		</ul>
+
+	</div>
+	<div class="horizontal-bar">
+		<ul>
+		  <li>
+			<div class="about-us">
+			  <a href="/about us/abt.html">About Us</a>
+			</div>
+		  </li>
+		  <li><a href="/contact/contact.html">Contact Us</a></li>
+		</ul>
+	  </div>
 	<!-- <br> -->
 
 	<script>
@@ -82,13 +137,13 @@
 		function peekTop() {
 			const topItem = stack.lastElementChild;
 			if (topItem) {
-				topItem.style.backgroundColor = '#f0ad4e'; // Change background color to yellow
+				topItem.style.backgroundImage = 'linear-gradient(to right, #f0ad5e, #f0ad4e)';
 				setTimeout(() => {
-					topItem.style.backgroundColor = '#37306B'; // Reset background color after 5 seconds
+					topItem.style.backgroundImage = ''; // Reset backgroundImage after 5 seconds
 				}, 800);
 			}
 		}
-
+		
 		function downloadJavaFile() {
 			const fileContent = 'import java.util.EmptyStackException;\n\npublic class StringStack {\n    private static final int DEFAULT_CAPACITY = 10;\n    private String[] elements;\n    private int size;\n\n    public StringStack() {\n        elements = new String[DEFAULT_CAPACITY];\n        size = 0;\n    }\n\n    public void push(String item) {\n        ensureCapacity();\n        elements[size++] = item;\n    }\n\n    public String pop() {\n        if (isEmpty()) {\n            throw new EmptyStackException();\n        }\n        String item = elements[--size];\n        elements[size] = null;\n        return item;\n    }\n\n    public boolean isEmpty() {\n        return size == 0;\n    }\n\n    public int size() {\n        return size;\n    }\n\n    private void ensureCapacity() {\n        if (size == elements.length) {\n            String[] newElements = new String[2 * size];\n            System.arraycopy(elements, 0, newElements, 0, size);\n            elements = newElements;\n        }\n    }\n\n    public static void main(String[] args) {\n        StringStack stack = new StringStack();\n        stack.push("Hello");\n        stack.push("World");\n        stack.push("Java");\n\n        System.out.println("Size of stack: " + stack.size());\n\n        while (!stack.isEmpty()) {\n            System.out.println(stack.pop());\n        }\n    }\n}';
 			const blob = new Blob([fileContent], { type: 'text/plain' });

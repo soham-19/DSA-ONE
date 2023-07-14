@@ -1,13 +1,113 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Bubble Sort Visualization</title>
-    <link rel="stylesheet" type="text/css" href="/sortstyles.css">
-  </head>
-  <body>
-    <h1 class="header">Shell Sort - Visualization</h1>
+
+<head>
+  <title>Shell Sort Visualization</title>
+  <link rel="stylesheet" href="/sortstyles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="icon" type="image/x-icon" href="/logo/bar-graph.png">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <ul class="navbar">
+    <li><a href="/index.html"><i class="fa fa-home"></i></a></li>
+    <li>
+      <a href="#">Sorting</a>
+      <ul class="drp">
+        <li><a href="/sorting/bubble/bubble-sort.html">Bubble Sort</a></li>
+        <li><a href="/sorting/selection/selection-sort.html">Selection Sort</a></li>
+        <li><a href="/sorting/shell/shell-sort.html">Shell Sort</a></li>
+        <li><a href="/sorting/merge/merge-sort.html">Merge Sort</a></li>
+        <li><a href="/sorting/quick/quick-sort.html">Quick Sort</a></li>
+        <li><a id="last" href="/sorting/insertion/insertion-sort.html">Insertion Sort</a></li>
+      </ul>
+    </li>
+    <li><a href="/stack/stack.html">Stack</a></li>
+		<li><a href="/queue/queue.html">Queue</a></li>
+  </ul>
+  <h1 class="header">Shell Sort <br> Visualization</h1>  <div style="display: flex;">
     <div id="container"></div>
-    <button onclick="sort()">Sort</button>
-    <script src="script.js"></script>
-  </body>
+    <div class="data">
+      <table>
+        <tr>
+          <th>*</th>
+          <th>Worst Case</th>
+          <th>Average Case</th>
+          <th>Best Case</th>
+        </tr>
+        <tr>
+          <td>Time Complexity</td>
+          <td>0(n<sup>2</sup>)</td>
+          <td>0(n<sup>2</sup>)</td>
+          <td>0(n)</td>
+        </tr>
+        <tr>
+          <td>Space Complexity</td>
+          <td>0(1)</td>
+          <td>0(1)</td>
+          <td>0(1)</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div id="sort-comp" style=>
+    <button id="sortt" onclick="sort()">Sort</button>
+    <div id="output">Comparisions</div>
+    <button onclick="downloadJavaFile()" id="download-button"> Download Code<i style="margin-left: 8px;" class="fa fa-download"></i></button>
+
+  </div>
+  <br>
+
+  <div style="display: flex;">
+    <div class="adv">
+
+
+    </div>
+    <div class="data adv-disadv">
+      <p>Advantages</p>
+      <ul>
+
+        <li>Faster average-case performance</li>
+        <li>Adaptive nature</li>
+        <li>In-place sorting algorithm</li>
+        <li>Efficient and versatile</li>
+
+
+      </ul>
+    </div>
+
+    <div class="data adv-disadv">
+      <p >Disadvantages</p>
+      <ul>
+
+        <li>Not a stable sorting algorithm</li>
+      <li>Non-optimal worst-case performance</li>
+      <li>Average-case efficiency advantage</li>
+      <li>In-place sorting method</li>
+
+
+      </ul>
+
+    </div>
+  </div>
+  </div>
+  <div class="horizontal-bar">
+    <ul>
+      <li>
+        <div class="about-us">
+          <a href="/about us/abt.html">About Us</a>
+        </div>
+      </li>
+      <li><a href="/contact/contact.html">Contact Us</a></li>
+    </ul>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
 </html>

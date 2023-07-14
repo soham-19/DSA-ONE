@@ -5,7 +5,7 @@ let numbers = [];
 for (let i = 0; i < 20; i++) {
   numbers.push(Math.floor(Math.random() * 100));
 }
-
+let count = 0;
 // create a bar element for each number and add it to the container
 for (let i = 0; i < numbers.length; i++) {
   const bar = document.createElement('div');
@@ -34,7 +34,8 @@ async function bubbleSort() {
         const temp = numbers[j];
         numbers[j] = numbers[j+1];
         numbers[j+1] = temp;
-
+        count++;
+        myFunction();
         // update the visualization
         bars[j].style.height = `${numbers[j]}px`;
         bars[j+1].style.height = `${numbers[j+1]}px`;
@@ -67,6 +68,11 @@ async function bubbleSort() {
 // sort the array when the button is clicked
 function sort() {
   bubbleSort();
+
+  
+}
+function myFunction() {
+  document.getElementById("output").innerHTML = "Comparisions : " + count;
 }
 
 function downloadJavaFile() {

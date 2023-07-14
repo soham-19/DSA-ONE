@@ -5,7 +5,7 @@ let numbers = [];
 for (let i = 0; i < 20; i++) {
   numbers.push(Math.floor(Math.random() * 100));
 }
-
+let count = 0;
 // create a bar element for each number and add it to the container
 for (let i = 0; i < numbers.length; i++) {
   const bar = document.createElement('div');
@@ -32,6 +32,8 @@ async function selectionSort() {
       await new Promise(resolve => setTimeout(resolve, 200));
 
       if (numbers[j] < numbers[minIndex]) {
+        count++;
+        myFunction();
         // update the minIndex
         minIndex = j;
       }
@@ -84,4 +86,7 @@ function downloadJavaFile() {
   link.click();
   document.body.removeChild(link);
   URL.revokeObjectURL(url);
+}
+function myFunction() {
+  document.getElementById("output").innerHTML = "Comparisions : " + count;
 }

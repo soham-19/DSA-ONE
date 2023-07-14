@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Queue Visualization</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="icon" type="image/x-icon" href="/logo/bar-graph.png">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <ul class="navbar">
+    <li><a href="/index.html"><i class="fa fa-home"></i></a></li>
+    <li>
+      <a href="#">Sorting</a>
+      <ul class="drp">
+        <li><a href="/sorting/bubble/bubble-sort.html">Bubble Sort</a></li>
+        <li><a href="/sorting/selection/selection-sort.html">Selection Sort</a></li>
+        <li><a href="/sorting/shell/shell-sort.html">Shell Sort</a></li>
+        <li><a href="/sorting/merge/merge-sort.html">Merge Sort</a></li>
+        <li><a href="/sorting/quick/quick-sort.html">Quick Sort</a></li>
+        <li><a id="last" href="/sorting/insertion/insertion-sort.html">Insertion Sort</a></li>
+      </ul>
+    </li>
+    <li><a href="/stack/stack.html">Stack</a></li>
+    <li><a href="/queue/queue.html">Queue</a></li>
+  </ul>
+  <h1 class="header">Queue - Visualization</h1>
+
+  <div id="wrapper">
+    <div class="queue-container">
+      <div class="queue">
+        <div class="queue-item">Item 1</div>
+        <div class="queue-item">Item 2</div>
+        <div class="queue-item">Item 3</div>
+      </div>
+
+      <div id="wrapper">
+        <div class="queue-controls">
+          <input type="text" id="item-input" placeholder="Enter item value">
+          <button onclick="enqueueItem()">Enqueue Item</button>
+          <button onclick="dequeueItem()">Dequeue Item</button>
+          <button onclick="peekFront()">Peek Front</button>
+          <button onclick="peekRear()">Peek Rear</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div id="base" style="display: flex;">
+    <div id="data">
+      <table>
+        <tr>
+          <th>*</th>
+          <th>enqueue(x)</th>
+          <th>dequeue()</th>
+          <th>peekFront()</th>
+          <th>peekRear()</th>
+        </tr>
+        <tr>
+          <td>Time Complexity</td>
+          <td>0(1)</td>
+          <td>0(1)</td>
+          <td>0(1)</td>
+          <td>0(1)</td>
+        </tr>
+
+      </table>
+
+    </div>
+    <div class="data adv-disadv">
+      <p>Queue</p>
+      <ul>
+
+        <li>follows the FIFO (First-In-First-Out) principle</li>
+        <li>Elements are added to the back and removed from the front.</li>
+        <li>It is used in scenarios where the order of processing matters.</li>
+        <li>Types : Linear Queue, Circular Queue, Priority Queue, Deque, Linked Queue</li>
+
+      </ul>
+
+    </div>
+  </div>
+  <div class="horizontal-bar">
+    <ul>
+      <li>
+        <div class="about-us">
+          <a href="/about us/abt.html">About Us</a>
+        </div>
+      </li>
+      <li><a href="/contact/contact.html">Contact Us</a></li>
+    </ul>
+  </div>
+
+  <div style="margin-left: 150px ; margin-top: -250px;">
+    <button onclick="downloadJavaFile()" id="download-button"> Download Code<i style="margin-left: 8px;"
+        class="fa fa-download"></i></button>
+  </div>
+
+  <script>
+    const queue = document.querySelector('.queue');
+    const itemInput = document.getElementById('item-input');
+
+    function enqueueItem() {
+      const itemInput = document.getElementById('item-input');
+      const queue = document.querySelector('.queue');
+
+      const value = itemInput.value;
+      const item = document.createElement('div');
+      item.classList.add('queue-item', 'enqueue');
+      item.innerText = value;
+      queue.appendChild(item);
+      itemInput.value = '';
+
+      setTimeout(() => {
+        item.classList.remove('enqueue');
+      }, 1000);
+
+      item.addEventListener('animationend', () => {
+        item.classList.remove('enqueueAnimation');
+      });
+
+      item.classList.add('enqueueAnimation');
+    }
+
+
+    function dequeueItem() {
+      const frontItem = queue.firstElementChild;
+      if (frontItem) {
+        frontItem.style.animation = 'dequeueAnimation 1s forwards';
+        setTimeout(() => {
+          queue.removeChild(frontItem);
+        }, 1000);
+      }
+    }
+
+    function peekFront() {
+      const frontItem = queue.firstElementChild;
+      if (frontItem) {
+        frontItem.style.backgroundImage = 'linear-gradient(to right, #f0ad5e, #f0ad4e)';
+        setTimeout(() => {
+          frontItem.style.backgroundImage = ''; // Reset backgroundImage after 5 seconds
+        }, 800);
+      }
+    }
+
+
+    function peekRear() {
+      const frontItem = queue.lastElementChild;
+      if (frontItem) {
+        frontItem.style.backgroundImage = 'linear-gradient(to right, #f0ad5e, #f0ad4e)';
+        setTimeout(() => {
+          frontItem.style.backgroundImage = ''; // Reset backgroundImage after 5 seconds
+        }, 800);
+      }
+    }
+    function downloadJavaFile() {
+    const fileContent = 'import java.util.EmptyStackException;\n\npublic class Queue<T> {\n    private static final int DEFAULT_CAPACITY = 10;\n    private T[] elements;\n    private int size;\n    private int front;\n    private int rear;\n\n    public Queue() {\n        elements = (T[]) new Object[DEFAULT_CAPACITY];\n        size = 0;\n        front = 0;\n        rear = -1;\n    }\n\n    public void enqueue(T item) {\n        ensureCapacity();\n        rear = (rear + 1) % elements.length;\n        elements[rear] = item;\n        size++;\n    }\n\n    public T dequeue() {\n        if (isEmpty()) {\n            throw new EmptyStackException();\n        }\n        T item = elements[front];\n        elements[front] = null;\n        front = (front + 1) % elements.length;\n        size--;\n        return item;\n    }\n\n    public T peek() {\n        if (isEmpty()) {\n            throw new EmptyStackException();\n        }\n        return elements[front];\n    }\n\n    public boolean isEmpty() {\n        return size == 0;\n    }\n\n    public int size() {\n        return size;\n    }\n\n    private void ensureCapacity() {\n        if (size == elements.length) {\n            T[] newElements = (T[]) new Object[2 * size];\n            for (int i = 0; i < size; i++) {\n                newElements[i] = elements[(front + i) % elements.length];\n            }\n            elements = newElements;\n            front = 0;\n            rear = size - 1;\n        }\n    }\n\n    public static void main(String[] args) {\n        Queue<String> queue = new Queue<>();\n        queue.enqueue("Hello");\n        queue.enqueue("World");\n        queue.enqueue("Java");\n\n        System.out.println("Size of queue: " + queue.size());\n\n        while (!queue.isEmpty()) {\n            System.out.println(queue.dequeue());\n        }\n    }\n}';
+    const blob = new Blob([fileContent], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.download = 'Queue.java';
+    link.href = url;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+}
+
+  </script>
+</body>
+
+</html>

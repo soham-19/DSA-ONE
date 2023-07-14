@@ -1,7 +1,8 @@
-/* Define your styles here */
+*{
+    font-family: 'Montserrat Alternates', sans-serif;
+  }
 
 
-/* Import Google font - Poppins */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 
 * {
@@ -28,41 +29,12 @@ body {
     background: #e7f2fd;
     background-color: #F4D03F;
     background-image: linear-gradient(132deg, #F4D03F 0%, #16A085 100%);
+    background-image: url('/logo/DSA\ ONElast.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
     text-align: center;
     padding: 80px 0;
-}
-
-.main h1 {
-    font-size: 70px;
-    font-weight: 500;
-    color: #553c9a;
-    border-right: 4px solid #000;
-    animation: cursor 1s 1 step-end, typing 11s steps(8);
-    white-space: pre;
-    overflow: hidden;
-    margin-top: -20%;
-    margin-left: 750px;
-    /* text-decoration: underline solid #fff 50px; */
-}
-
-.main h4 {
-    /* margin: 100px; */
-    font-size: 20px;
-    font-weight: 500;
-    color: #000;
-    opacity: 0;
-    margin-left: -190px;
-    margin-top: -150px;
-    padding-top: 0;
-    font-style: italic;
-    font-family: 'Segoe UI', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif';
- animation:second_text_anim 10s linear 4s infinite;
-    z-index: 100000000000000;
-
-    /* margin-top: -%; */
 }
 
 @keyframes cursor {
@@ -116,7 +88,7 @@ ul {
     margin: 0;
     padding: 0;
     list-style: none;
-    background: #333;
+    background: #222;
     height: fit-content;
     /* Align items to the right */
 }
@@ -124,7 +96,7 @@ ul {
 ul li {
     display: inline-block;
     position: relative;
-    width: 20%;
+    width: 15%;
     /* height: 10%; */
 
 }
@@ -156,12 +128,20 @@ ul li ul.drp{
     margin: 0;
     padding: 0;
     display: none;
-    font-style: italic;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+#last:hover{
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
 
+
 ul li a:hover {
-    background: #666;
+    font-style: italic;
+    letter-spacing: 1px;
+    background: #444;
     display: block;
 }
 
@@ -169,3 +149,66 @@ ul li:hover ul.drp{
     display: block;
     font-size: 10px;
 }
+
+.horizontal-bar {
+  width: 100%;
+  height: 30px;
+  background-color: #111;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  /* display: flex; */
+  /* justify-content: left; */
+  margin: 0;
+  padding: 0;
+}
+
+.horizontal-bar ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.horizontal-bar li {
+  /* margin-top: 5px; */
+  height: 0px;
+  margin: 0;padding: 0;
+}
+
+.horizontal-bar a {
+    /* margin: 10px; */
+    /* padding: 20px; */
+    color: white;
+    text-decoration: none;
+}
+
+
+.about-us {
+  position: relative;
+  display: inline-block;
+  color: white;
+  cursor: pointer;
+}
+
+.popup {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 200px;
+  padding: 10px;
+  background-color: #333;
+  color: white;
+  font-size: 14px;
+  line-height: 1.4;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.about-us:hover .popup {
+  opacity: 1;
+  visibility: visible;
+}
+
+

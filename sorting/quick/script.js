@@ -1,12 +1,12 @@
 const container = document.getElementById('container');
 
-// create an array of random numbers to sort
+// Create an array of random numbers to sort
 let numbers = [];
 for (let i = 0; i < 20; i++) {
   numbers.push(Math.floor(Math.random() * 100));
 }
 
-// create a bar element for each number and add it to the container
+// Create a bar element for each number and add it to the container
 for (let i = 0; i < numbers.length; i++) {
   const bar = document.createElement('div');
   bar.classList.add('bar');
@@ -17,59 +17,85 @@ for (let i = 0; i < numbers.length; i++) {
   container.appendChild(bar);
 }
 
-// implement merge sort using iterations and update the visualization after each merge
-async function mergeSort() {
+// Utility function to update the visualization
+function updateVisualization(arr, comparingIndices, sortedIndices) {
   const bars = container.querySelectorAll('.bar');
-  const n = numbers.length;
-  for (let currentSize = 1; currentSize < n; currentSize *= 2) {
-    for (let start = 0; start < n - 1; start += 2 * currentSize) {
-      const mid = Math.min(start + currentSize - 1, n - 1);
-      const end = Math.min(start + 2 * currentSize - 1, n - 1);
-      await merge(start, mid, end, bars);
-    }
-  }
-}
+  for (let i = 0; i < arr.length; i++) {
+    const bar = bars[i];
+    bar.style.height = `${arr[i]}px`;
+    bar.querySelector('p').innerHTML = arr[i];
 
-async function merge(start, mid, end, bars) {
-  const leftArray = numbers.slice(start, mid + 1);
-  const rightArray = numbers.slice(mid + 1, end + 1);
-  let i = 0,
-    j = 0,
-    k = start;
-  while (i < leftArray.length && j < rightArray.length) {
-    if (leftArray[i] < rightArray[j]) {
-      numbers[k++] = leftArray[i++];
+    if (comparingIndices.includes(i)) {
+      bar.classList.add('focus');
     } else {
-      numbers[k++] = rightArray[j++];
+      bar.classList.remove('focus');
     }
-    // highlight the bars being compared
-    bars[start + i].classList.add('focus');
-    bars[mid + 1 + j].classList.add('focus');
-    // wait a short time to slow down the animation
-    await new Promise((resolve) => setTimeout(resolve, 200));
-    // update the visualization
-    bars[start + i].style.height = `${numbers[start + i]}px`;
-    bars[mid + 1 + j].style.height = `${numbers[mid + 1 + j]}px`;
-    bars[start + i].querySelector('p').innerHTML = numbers[start + i];
-    bars[mid + 1 + j].querySelector('p').innerHTML = numbers[mid + 1 + j];
-    // remove focus class from the bars being compared
-    bars[start + i].classList.remove('focus');
-    bars[mid + 1 + j].classList.remove('focus');
-  }
-  while (i < leftArray.length) {
-    numbers[k++] = leftArray[i++];
-  }
-  while (j < rightArray.length) {
-    numbers[k++] = rightArray[j++];
-  }
-  // highlight the sorted bars in green
-  for (let l = start; l <= end; l++) {
-    bars[l].classList.add('sorted');
-    bars[l].querySelector('p').classList.add('hide');
+
+    if (sortedIndices.includes(i)) {
+      bar.classList.add('sorted');
+    } else {
+      bar.classList.remove('sorted');
+    }
+
+    if (sortedIndices.includes(i) && arr[i] === i) {
+      bar.classList.add('right-position');
+    } else {
+      bar.classList.remove('right-position');
+    }
   }
 }
 
-// sort the array when the button is clicked
-function sort() {
-  mergeSort();
+// Implement Quick Sort and update the visualization after each swap
+async function quickSort(arr, low, high) {
+  if (low < high) {
+    const pivotIndex = await partition(arr, low, high);
+    await quickSort(arr, low, pivotIndex - 1);
+    await quickSort(arr, pivotIndex + 1, high);
+  }
 }
+
+async function partition(arr, low, high) {
+  const pivot = arr[high];
+  let i = low - 1;
+
+  for (let j = low; j < high; j++) {
+    // Highlight the comparing bars in red
+    updateVisualization(arr, [j, high], []);
+
+    await new Promise(resolve => setTimeout(resolve, 100));
+
+    if (arr[j] <= pivot) {
+      i++;
+
+      // Swap arr[i] and arr[j]
+      const temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
+
+      // Update the visualization
+      updateVisualization(arr, [j, high], [i]);
+
+      // await new Promise(resolve => setTimeout(resolve, 200));
+    }
+  }
+
+  // Swap arr[i+1] and arr[high] (pivot)
+  const temp = arr[i + 1];
+  arr[i + 1] = arr[high];
+  arr[high] = temp;
+
+  // Update the visualization
+  updateVisualization(arr, [high], [i + 1]);
+
+  return i + 1;
+}
+
+// Sort the array when the button is clicked
+function sort() {
+  const low = 0;
+  const high = numbers.length - 1;
+  quickSort(numbers, low, high);
+}
+
+// Call the sort function to initiate the sorting process
+sort();

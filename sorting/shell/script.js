@@ -5,6 +5,8 @@ let numbers = [];
 for (let i = 0; i < 20; i++) {
   numbers.push(Math.floor(Math.random() * 100));
 }
+let count = 0;
+
 
 // create a bar element for each number and add it to the container
 for (let i = 0; i < numbers.length; i++) {
@@ -20,53 +22,50 @@ for (let i = 0; i < numbers.length; i++) {
 // implement shell sort and update the visualization after each swap
 async function shellSort() {
   const bars = container.querySelectorAll('.bar');
-  let n = numbers.length;
-  let gap = Math.floor(n / 2);
-
+  const len = numbers.length;
+  let gap = Math.floor(len / 2);
   while (gap > 0) {
-    for (let i = gap; i < n; i++) {
-      let temp = numbers[i];
+    for (let i = gap; i < len; i++) {
+      const key = numbers[i];
       let j = i;
-      bars[j].classList.add('processing');
+      while (j >= gap && numbers[j - gap] > key) {
+        count++;
+        myFunction();
 
-      while (j >= gap && numbers[j - gap] > temp) {
-        bars[j - gap].classList.add('focus');
-        await new Promise(resolve => setTimeout(resolve, 200));
+        bars[j].style.backgroundColor = "green"; // change color of bar being compa#4B0082
+        bars[j - gap].style.backgroundColor = "green"; // change color of the compa#4B0082 bar
 
         numbers[j] = numbers[j - gap];
         bars[j].style.height = `${numbers[j]}px`;
         bars[j].querySelector('p').innerHTML = numbers[j];
-        bars[j].classList.remove('processing');
-        bars[j - gap].classList.remove('focus');
+
         j -= gap;
+        await new Promise(resolve => setTimeout(resolve, 300)); // delay to slow down the animation
 
-        bars[j].classList.add('processing');
-        await new Promise(resolve => setTimeout(resolve, 200));
+        // reset color of bars after comparison
+        bars[j].style.backgroundColor = "#222"; // normal gray
+        bars[j + gap].style.backgroundColor = "#222"; // normal gray
       }
+      numbers[j] = key;
+      bars[j].style.height = `${key}px`;
+      bars[j].querySelector('p').innerHTML = key;
 
-      numbers[j] = temp;
-      bars[j].style.height = `${numbers[j]}px`;
-      bars[j].querySelector('p').innerHTML = numbers[j];
-      bars[j].classList.remove('processing');
-      bars[j].classList.add('sorted');
-      bars[j].querySelector('p').classList.add('hide');
+      // change color of sorted bar to green
+      bars[j].style.backgroundColor = "#4B0082"; // green
     }
-
     gap = Math.floor(gap / 2);
   }
-
-  // change the color of the sorted bars to green
-  for (let i = 0; i < bars.length; i++) {
-    if (bars[i].classList.contains('sorted')) {
-      continue;
-    }
-
-    bars[i].classList.add('sorted');
-    bars[i].querySelector('p').classList.add('hide');
+  // change color of all bars to green after sorting is finished
+  for (let i = 0; i < len; i++) {
+    bars[i].style.backgroundColor = "#4B0082"; // green
   }
 }
 
 // sort the array when the button is clicked
 function sort() {
   shellSort();
+}
+
+function myFunction() {
+  document.getElementById("output").innerHTML = "Comparisons: " + count;
 }

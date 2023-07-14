@@ -2,15 +2,9 @@
 <html>
 
 <head>
-  <title>Merge Sort Visualization</title>
+  <title>Bubble Sort Visualization</title>
   <link rel="stylesheet" href="/sortstyles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="icon" type="image/x-icon" href="/logo/bar-graph.png">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@500&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -27,10 +21,11 @@
         <li><a id="last" href="/sorting/insertion/insertion-sort.html">Insertion Sort</a></li>
       </ul>
     </li>
-    <li><a href="/stack/stack.html">Stack</a></li>
-		<li><a href="/queue/queue.html">Queue</a></li>
+    <li><a href="/stack/index.html">Stack</a></li>
+    <li><a href="/queue/index.html">Queue</a></li>
   </ul>
-  <h1 class="header">Merge Sort <br> Visualization</h1>  <div style="display: flex;">
+  <h1 class="header">Binary Search - Visualization</h1>
+  <div style="display: flex;">
     <div id="container"></div>
     <div class="data">
       <table>
@@ -55,57 +50,48 @@
       </table>
     </div>
   </div>
-  <div id="sort-comp" style=>
+  <div id="sort-comp" style="display: flex; width: min-content;align-content: baseline;margin: -40px auto;">
     <button id="sortt" onclick="sort()">Sort</button>
     <div id="output">Comparisions</div>
-    <button onclick="downloadJavaFile()" id="download-button"> Download Code<i style="margin-left: 8px;" class="fa fa-download"></i></button>
+    <button onclick="downloadJavaFile()" id="download-button">Download Java Code</button>
 
   </div>
   <br>
 
   <div style="display: flex;">
-    <div class="adv">
 
-
-    </div>
     <div class="data adv-disadv">
-      <p>Advantages</p>
+      <p style="font-size: larger; line-height: normal; margin: 0 0 ; font-weight: bold;">Advantages</p>
       <ul>
 
-        <li>Stability</li>
-      <li>Non-optimal worst-case performance</li>
-      <li>Memory efficient</li>
-      <li>Versatility</li>
-      <li>Adaptability</li>
-
+        <li>Easy to understand and implement</li>
+        <li>No additional memory space required</li>
+        <li>Adaptable to different data types</li>
+        <li>Maintains relative order of elements (stable sorting)</li>
 
       </ul>
+
     </div>
 
     <div class="data adv-disadv">
-      <p >Disadvantages</p>
+      <p style="font-size: larger; line-height: normal; margin: 0 0 ; font-weight: bold;">Disadvantages</p>
       <ul>
 
-        <li>Recursive algorithm</li>
-        <li>Not always optimal for small datasets</li>
-        <li>Complexity of implementation</li>
-        <li>More Space complexity</li>
-
+        <li>Time complexity of O(n^2), making it slow for large data sets</li>
+        <li>Inefficient due to multiple passes through the data</li>
+        <li>Inefficient due to multiple passes through the data</li>
+        <li>Comparison operator limits efficiency in some cases</li>
 
       </ul>
 
     </div>
   </div>
-  </div>
-  <div class="horizontal-bar">
-    <ul>
-      <li>
-        <div class="about-us">
-          <a href="/about us/abt.html">About Us</a>
-        </div>
-      </li>
-      <li><a href="/contact/contact.html">Contact Us</a></li>
-    </ul>
+
+  <div class="download" id="download-section">
+    <!-- <p>Click the button below to download the Java code:</p> -->
+    <span>
+    </span>
+
   </div>
 
   <script src="script.js"></script>
